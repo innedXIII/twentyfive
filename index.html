@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quán Rượu Tầng 25 - Menu</title>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #55ced1;
+            --text-color:#ffffff;
+            --accent-color: #ffffff;
+            --item-border: rgba(255, 255, 255, 0.3);
+   	    --modal-bg: #66e0e3;
+            --modal-text: #ffffff;
+            --bar-bg: #ddd;
+        }
+  
+
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            transition: 0.3s;
+            padding-bottom: 100px;
+        }
+
+        /* TOPBAR */
+        .topbar {
+            text-align: right;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+      
+
+        /* LAYOUT */
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+/*HEADER*/     
+ .title-small {
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 6px;
+  opacity: 0.8;
+Margin-bottom: 0px;
+
+}
+
+.title-main {
+  font-size: 45px;
+  font-family: 'Oswald', sans-serif;
+ font-weight: 200;
+  letter-spacing: 6px;
+  margin-top: 0px;
+  text-shadow: 0 0 20px rgba(201,169,110,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+
+}
+.title-main span {
+ font-weight: 500;
+  transform: scale(1.05);
+  display: inline-block;
+
+}
+.subtitle {
+  font-size: 12px;
+  letter-spacing: 3px;
+  opacity: 0.5;
+}
+
+
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+/* CONTAINER */
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+
+/* 2 gạch hai bên */
+.title-main::before,
+.title-main::after {
+  content: "";
+  width: 50px;      /* độ dài gạch */
+  height: 1px;
+  background: var(--accent-color);
+transform: translateY(8px);
+  opacity: 0.6;
+}
+        /* GRID SYSTEM */
+       .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 20px;
+}
+
+        .cocktail-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .cocktail-item:hover img{
+    filter: drop-shadow(0 0 15px rgba(255,255,255,0.6));
+        }
+
+        .glass-box {
+            width: 100%;
+            height: 160px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            margin-bottom: 15px;
+        }
+
+        .glass-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .info-box {
+            width: 100%;
+        }
+
+        .name {
+            font-weight: 600;
+            font-size: 17px;
+            margin: 10px 0;
+            padding: 5px 0;
+            border-top: 2px solid var(--text-color);
+           
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .short-desc {
+            font-size: 13px;
+            opacity: 0.7;
+            text-transform: lowercase;
+            line-height: 1.4;
+        }
+
+        /* MODAL */
+        .modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-box {
+            background: var(--modal-bg);
+            width: 380px;
+            padding: 30px;
+            border-radius: 20px;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .modal-img {
+            height: 220px;
+            width: 100%;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+
+        .modal-box h2 {
+            margin: 0;
+            font-size: 28px;
+            color: var(--accent-color);
+        }
+
+        .modal-box p.main-desc {
+            font-style: italic;
+            margin: 10px 0;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .detail-row {
+            margin-top: 20px;
+        }
+
+        .detail-row label {
+            display: block;
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .strength-bar-bg {
+            height: 8px;
+            background: var(--bar-bg);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #ffd700, var(--accent-color));
+            transition: width 0.8s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+        }
+.intro {
+  text-align: center;
+  font-style: italic;
+  opacity: 0.6;
+  margin-top: 50px;
+color: #ff1e1e;
+}
+.cocktail-item.active {
+    transform: translateY(-10px) scale(1.08);
+}
+
+/* GLOW KHUNG LY */
+.cocktail-item.active .glass-box {
+    box-shadow:
+        0 0 10px rgba(255,255,255,0.3),
+        0 0 25px rgba(255,45,45,0.5),
+        0 0 60px rgba(255,45,45,0.35);
+
+    border: 1px solid rgba(255,45,45,0.6);
+}
+
+/* GLOW LY RƯỢU */
+.cocktail-item.active img {
+    filter:
+        drop-shadow(0 0 10px rgba(255,255,255,0.6))
+        drop-shadow(0 0 25px rgba(255,45,45,0.5));
+    transform: scale(1.05);
+}
+
+/* PULSE NHẸ (đập ánh sáng bar) */
+@keyframes glowPulse {
+    0% {
+        box-shadow: 0 0 15px rgba(255,45,45,0.3);
+    }
+    50% {
+        box-shadow: 0 0 35px rgba(255,45,45,0.7);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(255,45,45,0.3);
+    }
+}
+
+.cocktail-item.active .glass-box {
+    animation: glowPulse 1.5s infinite;
+}
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 850px) {
+            .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+            h1 { font-size: 50px; }
+            h1 span { font-size: 30px; }
+        }
+
+      @media (max-width: 480px) {
+    .menu-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 16px;
+    }
+
+    .glass-box {
+        height: 120px;
+    }
+
+    .name {
+        font-size: 14px;
+    }
+
+    .short-desc {
+        font-size: 11px;
+    }
+h1 {
+        font-size: 30px;
+        letter-spacing: 3px;
+        line-height: 1.2;
+    }
+
+    h1 span {
+        display: inline;   /* QUAN TRỌNG: bỏ xuống dòng */
+        margin-top: 0;
+        font-size: 30px;
+        letter-spacing: 3px;
+    }
+}
+    </style>
+</head>
+<body>
+
+<div class="topbar">
+    
+</div>
+
+<div class="container">
+
+  <div class="header">
+    <div class="title-small">HIDDEN BAR</div>
+    <div class="title-main">  twenty <span>five</span></div>
+  </div>
+    <div class="menu-grid" id="menuContainer">
+        <!-- Dữ liệu sẽ được render bằng JS -->
+    </div>
+</div>
+<div class="intro">
+  "Quán bar tại gia · không lo về giá"
+</div>
+<!-- MODAL CỦA BẠN -->
+<div id="modal" class="modal" onclick="closeModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <span class="close-btn" onclick="document.getElementById('modal').style.display='none'">&times;</span>
+        <img id="modalImg" class="modal-img">
+        <h2 id="modalTitle"></h2>
+        <p id="modalDesc" class="main-desc"></p>
+
+        <div class="detail-row">
+            <label>HƯƠNG VỊ</label>
+            <p id="modalFlavor" style="margin: 0;"></p>
+        </div>
+
+        <div class="detail-row">
+            <label>ĐỘ MẠNH</label>
+            <div class="strength-bar-bg">
+                <div id="strengthFill" class="strength-fill"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const cocktails = {
+    "PURPLE RAIN": { img: "images/cocktail_1.png", desc: "Gin · Blue Curacao · Grenadine · Cranberry  · lemon juice", flavor: "Ngọt nhẹ mùi vị trái cây", strength: 35 },
+    "DEEP SEA": { img: "images/cocktail_2.png", desc: "Vodka · Blue Curacao · Mint · Sprite · lemon juice", flavor: "Bạc hà mát lạnh", strength: 30 },
+    "ELECTRIC SHARK": { img: "images/cocktail_3.png", desc: "Malibu · Blue Curacao · Grenadine · pineapple juice", flavor: "Tropical, dễ uống, hợp buổi tối chill", strength: 40 },
+    "EARL GREY MARTEANI": { img: "images/cocktail_4.png", desc: "Earl Grey gin infusion · Elderflower · lemon juice", flavor: "Vị chát kèm theo hương trà thanh lịch, cổ điển", strength: 35 },
+    "GINGER HIGHBALL": { img: "images/cocktail_5.png", desc: "Whisky · Cranberry · ginger soda · lemon juice", flavor: "Nước giải khát vị gừng", strength: 30 },
+    "XI MUOI": { img: "images/cocktail_6.png", desc: "Xi muoi wine · Persimmon wine · pink salt", flavor: "Mặn ngọt", strength: 35 },
+    "ELDERFLOWER BERRY": { img: "images/cocktail_7.png", desc: "Gin/Vodka · Elderflower · Cranberry · lemon juice", flavor: "Ngọt nhẹ, hương vị Cranberry", strength: 35 },
+    "MINT MOCHA MARTINI": { img: "images/cocktail_9.png", desc: "Vodka · Kahlúa · Mint · ice cream", flavor: "Đắng nhẹ, mùi bạc hà kết hợp kem vani béo ngậy", strength: 60 },
+    "CAFE CỐT DỪA": { img: "images/cocktail_8.png", desc: "Vodka · Kahlúa · Malibu · Espresso", flavor: "Cafe cốt dừa đặc trưng của Việt Nam", strength: 85 },
+    "WHISKY SOUR": { img: "images/cocktail_10.png", desc: "Whisky · Elderflower · lemon juice · egg white", flavor: "Vị chua nhẹ cùng mùi hương hoa cơm nguội", strength: 65 },
+    "COSMOPOLITAN": { img: "images/cocktail_11.png", desc: "Vodka · Blue Curacao · Cranberry · lemon juice", flavor: "Vị ngọt thanh kết hợp mùi vỏ cam", strength: 65}
+  };
+
+// Render Menu
+const container = document.getElementById('menuContainer');
+Object.keys(cocktails).forEach(name => {
+    const item = cocktails[name];
+    const html = `
+        <div class="cocktail-item" onclick="openModal('${name}')">
+            <div class="glass-box">
+                <img src="${item.img}" alt="${name}" onerror="this.src='https://via.placeholder.com/100x150?text=Ly'">
+            </div>
+            <div class="info-box">
+                <div class="name">${name}</div>
+                <div class="short-desc">${item.desc}</div>
+            </div>
+        </div>
+    `;
+    container.innerHTML += html;
+});
+
+function openModal(name) {
+    const data = cocktails[name];
+    document.getElementById('modal').style.display = 'flex';
+    document.getElementById('modalTitle').innerText = name;
+    document.getElementById('modalImg').src = data.img;
+    document.getElementById('modalDesc').innerText = data.desc;
+    document.getElementById('modalFlavor').innerText = data.flavor;
+    
+    // Reset bar trước khi chạy animation
+    const bar = document.getElementById('strengthFill');
+    bar.style.width = '0%';
+    setTimeout(() => {
+        bar.style.width = data.strength + '%';
+	}, 100);
+}
+
+function closeModal(e) {
+    if(e.target.id === 'modal') {
+        document.getElementById('modal').style.display = 'none';
+    }
+}
+
+
+</script>
+
+</body>
+</html>
